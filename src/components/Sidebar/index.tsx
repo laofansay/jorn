@@ -7,7 +7,7 @@ import Image from "next/image";
 import SidebarItem from "@/components/Sidebar/SidebarItem";
 import ClickOutside from "@/components/ClickOutside";
 import useLocalStorage from "@/hooks/useLocalStorage";
-
+import { FaHireAHelper } from "react-icons/fa";
 interface SidebarProps {
   sidebarOpen: boolean;
   setSidebarOpen: (arg: boolean) => void;
@@ -48,6 +48,11 @@ const menuGroups = [
         label: "Dashboard",
         route: "#",
         children: [{ label: "eCommerce", route: "/" }],
+      },
+      {
+        icon: <FaHireAHelper />,
+        label: "打印助手",
+        route: "/cheque",
       },
       {
         icon: (
