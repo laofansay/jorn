@@ -55,6 +55,14 @@ const menuGroups = [
         route: "/cheque",
       },
       {
+        icon: <FaHireAHelper />,
+        label: "每日账款",
+        route: "#",
+        children: [{ label: "明细账单", route: "/cheque" },
+                  { label: "今日汇总", route: "/" }
+        ],
+      },
+      {
         icon: (
           <svg
             className="fill-current"

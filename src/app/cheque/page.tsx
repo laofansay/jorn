@@ -48,7 +48,7 @@ const FormElementsPage = () => {
           <div className="flex flex-col gap-5.5 p-6.5">
             <div>
               <label className="mb-3 block text-sm font-medium text-black dark:text-white">
-                请上传支票图片
+                请上传支票图片(规格:612px*257px)
               </label>
               <input
                 multiple

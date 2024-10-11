@@ -9,7 +9,7 @@ const PdfViewer = ({ fileUrl }) => {
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
     return (
-        <div style={{ height: '550px', width: '100%' }}>
+        <div className="h-[550px] w-[80%] mx-auto  items-center justify-center">
             <PDFWorker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
                 <Viewer
                     fileUrl={fileUrl}
