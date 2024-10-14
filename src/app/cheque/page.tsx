@@ -1,12 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import PdfViewer from '@/components//pdf/PdfViewer'; // Ensure you have the PdfViewer component imported
-
+import PdfViewer from "@/components//pdf/PdfViewer"; // Ensure you have the PdfViewer component imported
 
 const FormElementsPage = () => {
   const [images, setImages] = useState([]);
-  const [pdfUrl, setPdfUrl] = useState(null);  // State to hold generated PDF URL
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
   const handleFileChange = (event: any) => {
     setImages(event.target.files);
@@ -18,8 +17,7 @@ const FormElementsPage = () => {
     for (let i = 0; i < images.length; i++) {
       formData.append("files", images[i]);
     }
-    try{
-
+    try {
       const response = await fetch("http://localhost:9090/api/pdf/generate", {
         method: "POST",
         body: formData,
@@ -30,11 +28,9 @@ const FormElementsPage = () => {
       }
 
       const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);  // Create object URL for PDF
+      const url = window.URL.createObjectURL(blob); // Create object URL for PDF
 
-      setPdfUrl(url);  // Set the URL to display the PDF in PdfViewer
-
-      
+      setPdfUrl(url); // Set the URL to display the PDF in PdfViewer
     } catch (error) {
       console.error("Error generating PDF:", error);
     }
@@ -66,15 +62,13 @@ const FormElementsPage = () => {
               上传文件
             </button>
             {pdfUrl && (
-          <div className="mt-2">
-            <PdfViewer fileUrl={pdfUrl} /> {/* Display the generated PDF */}
+              <div className="mt-2">
+                <PdfViewer fileUrl={pdfUrl} /> {/* Display the generated PDF */}
+              </div>
+            )}
           </div>
-        )}
-          </div>
-          
         </form>
-    </div>
-       
+      </div>
     </DefaultLayout>
   );
 };
