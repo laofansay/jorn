@@ -18,7 +18,7 @@ const FormElementsPage = () => {
       formData.append("files", images[i]);
     }
     try {
-      const response = await fetch(`${process.env.BASE_URL}/api/pdf/generate`, {
+      const response = await fetch("/api/pdf/generate", {
         method: "POST",
         body: formData,
       });
