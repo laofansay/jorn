@@ -5,6 +5,14 @@ import "@/css/satoshi.css";
 import "@/css/style.css";
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
+import dynamic from "next/dynamic";
+
+import { ModalProvider } from "@/providers/modal-provider";
+import { ToastProvider } from "@/providers/toast-provider";
+
+const ReduxProvider = dynamic(() => import("@/store/redux-provider"), {
+  ssr: false,
+});
 
 export default function RootLayout({
   children,
@@ -24,7 +32,9 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true}>
         <div className="dark:bg-boxdark-2 dark:text-bodydark">
-          {loading ? <Loader /> : children}
+          <ToastProvider />
+          <ModalProvider />
+          <ReduxProvider> {loading ? <Loader /> : children}</ReduxProvider>
         </div>
       </body>
     </html>

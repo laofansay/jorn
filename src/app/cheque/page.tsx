@@ -1,9 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import PdfViewer from "@/components//pdf/PdfViewer"; // Ensure you have the PdfViewer component imported
+import PdfViewer from "@/components/pdf/PdfViewer"; // Ensure you have the PdfViewer component imported
+import { downloadEntity } from "../shared/reducers/entities/check-job-day.reducer";
+import { useAppDispatch } from "@/store";
 
 const FormElementsPage = () => {
+  const dispatch = useAppDispatch();
   const [images, setImages] = useState([]);
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
@@ -18,19 +21,22 @@ const FormElementsPage = () => {
       formData.append("files", images[i]);
     }
     try {
-      const response = await fetch("/api/pdf/generate", {
-        method: "POST",
-        body: formData,
-      });
+      // const response = await fetch("/api/pdf/generate", {
+      //   method: "POST",
+      //   body: formData,
+      // });
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      const resultAction = dispatch(
+        downloadEntity({ id: 1508, day: "10-14-2024" }),
+      );
+      if (downloadEntity.fulfilled.match(resultAction)) {
+        const blob = await resultAction.payload; // Assuming this is a Blob
+        const url = window.URL.createObjectURL(blob); // Create object URL for PDF
+        setPdfUrl(url);
+      } else {
+        console.error("Download failed: 下载pdf异常");
       }
-
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob); // Create object URL for PDF
-
-      setPdfUrl(url); // Set the URL to display the PDF in PdfViewer
+      // Set the URL to display the PDF in PdfViewer
     } catch (error) {
       console.error("Error generating PDF:", error);
     }
@@ -59,7 +65,7 @@ const FormElementsPage = () => {
               type="submit"
               className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray hover:bg-opacity-90"
             >
-              上传文件
+              转换PDF
             </button>
             {pdfUrl && (
               <div className="mt-2">
@@ -74,3 +80,6 @@ const FormElementsPage = () => {
 };
 
 export default FormElementsPage;
+function dispatch(arg0: any) {
+  throw new Error("Function not implemented.");
+}

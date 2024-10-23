@@ -51,15 +51,21 @@ const menuGroups = [
       },
       {
         icon: <FaHireAHelper />,
-        label: "打印助手",
-        route: "/cheque",
+        label: "支票打印",
+        route: "#",
+        children: [
+          { label: "任务管理", route: "/job/checkJob" },
+          { label: "每日支票任务", route: "/job/checkJobDay" },
+          { label: "打印助手", route: "/cheque" },
+        ],
       },
       {
         icon: <FaHireAHelper />,
         label: "每日账款",
         route: "#",
-        children: [{ label: "明细账单", route: "/cheque" },
-                  { label: "今日汇总", route: "/" }
+        children: [
+          { label: "明细账单", route: "/cheque" },
+          { label: "今日汇总", route: "/" },
         ],
       },
       {

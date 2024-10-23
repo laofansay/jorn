@@ -13,7 +13,7 @@ const PdfViewer: React.FC<PdfViewerProps> = ({ fileUrl }) => {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
   return (
-    <div className="mx-auto h-[550px] w-[80%]  items-center justify-center">
+    <div className="mx-auto  items-center justify-center">
       <PDFWorker
         workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}
       >
