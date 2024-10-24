@@ -1,6 +1,6 @@
-import dayjs from 'dayjs';
-import { TransactionType } from 'app/shared/model/enumerations/transaction-type.model';
-import { Born } from 'app/shared/model/enumerations/born.model';
+import dayjs from "dayjs";
+import { TransactionType } from "@/app/shared/model/enumerations/transaction-type.model";
+import { Born } from "@/app/shared/model/enumerations/born.model";
 
 export interface IEveryDayBill {
   id?: number;

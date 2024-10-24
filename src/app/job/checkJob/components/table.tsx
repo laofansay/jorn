@@ -57,7 +57,7 @@ export const CheckJobsTable: React.FC<ICheckJob[]> = ({ data }) => {
       id: "actions",
       header: "操作",
       cell: ({ row }) => (
-        <Link href={`/profile/addresses/${row.original.id}`}>
+        <Link href={`/job/checkJob/${row.original.id}`}>
           <Button size="icon" variant="outline">
             <EditIcon className="h-4" />
           </Button>

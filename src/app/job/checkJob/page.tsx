@@ -51,11 +51,10 @@ export default async function CheckJobPage({
     <DefaultLayout>
       <Breadcrumb pageName="每日支票任务" />
 
-      <div className="flex-col">
+      <div className="h-[80vh] rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
         <div className="flex-1 ">
           <div className="flex items-center justify-between">
-            <UserCombobox initialValue={pathname} />
-            <Link href="/profile/addresses/new">
+            <Link href="/job/checkJob/new">
               <Button>
                 <PlusIcon className="mr-2 h-4" /> Add New
               </Button>

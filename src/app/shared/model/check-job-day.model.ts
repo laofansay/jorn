@@ -1,6 +1,6 @@
-import dayjs from 'dayjs';
-import { ICheckJob } from 'app/shared/model/check-job.model';
-import { JobStatus } from 'app/shared/model/enumerations/job-status.model';
+import dayjs from "dayjs";
+import { ICheckJob } from "@/app/shared/model/check-job.model";
+import { JobStatus } from "@/app/shared/model/enumerations/job-status.model";
 
 export interface ICheckJobDay {
   id?: number;

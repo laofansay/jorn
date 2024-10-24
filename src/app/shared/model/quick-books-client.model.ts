@@ -1,5 +1,5 @@
-import dayjs from 'dayjs';
-import { IQuickBooksToken } from 'app/shared/model/quick-books-token.model';
+import dayjs from "dayjs";
+import { IQuickBooksToken } from "app/shared/model/quick-books-token.model";
 
 export interface IQuickBooksClient {
   id?: number;

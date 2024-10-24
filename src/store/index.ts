@@ -10,6 +10,8 @@ import checkJobLog from "@/app/shared/reducers/entities//check-job-log.reducer";
 import quickBooksClient from "@/app/shared/reducers/entities/quick-books-client.reducer";
 import quickBooksToken from "@/app/shared/reducers/entities/quick-books-token.reducer";
 
+import googleFile from "@/app/shared/reducers/entities/google-drive.reducer";
+
 import { authReducer } from "@/store/authSlice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { ThunkAction, UnknownAction } from "@reduxjs/toolkit";
@@ -52,6 +54,7 @@ const rootReducer = combineReducers({
   authentication,
   everyDayBill,
   checkJob,
+  googleFile,
   checkJobDay,
   quickBooksClient,
   checkJobLog,

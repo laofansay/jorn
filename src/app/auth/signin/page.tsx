@@ -48,9 +48,8 @@ const SignIn: React.FC = () => {
   };
 
   return (
-    <DefaultLayout>
+    <div className="m-2 p-2">
       <Breadcrumb pageName="Sign In" />
-
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">
           <div className="hidden w-full xl:block xl:w-1/2">
@@ -332,7 +331,7 @@ const SignIn: React.FC = () => {
           </div>
         </div>
       </div>
-    </DefaultLayout>
+    </div>
   );
 };
 
