@@ -9,7 +9,6 @@ import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { UserCombobox } from "./components/switcher";
 import { CheckJobsTable } from "./components/table";
 
 import {
@@ -18,6 +17,7 @@ import {
 } from "@/app/shared/reducers/entities/check-job.reducer";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { useEffect } from "react";
+import { ICheckJob } from "@/app/shared/model/check-job.model";
 
 export default async function CheckJobPage({
   params,
@@ -61,7 +61,7 @@ export default async function CheckJobPage({
             </Link>
           </div>
           {checkJobs ? (
-            <CheckJobsTable data={checkJobs} />
+            <CheckJobsTable data={checkJobs.slice()} />
           ) : (
             <Card className="my-2">
               <CardContent>

@@ -5,15 +5,16 @@ import { partialUpdateEntity } from "@/app/shared/reducers/entities/check-job.re
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { Tooltip } from "@nextui-org/react";
 import { ColumnDef } from "@tanstack/react-table";
 import { EditIcon } from "lucide-react";
-import { Bookmark } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-export const CheckJobsTable: React.FC<ICheckJob[]> = ({ data }) => {
+interface CheckJobsTableProps {
+  data: ICheckJob[];
+}
+export const CheckJobsTable: React.FC<{ data: ICheckJob[] }> = ({ data }) => {
   const dispatch = useAppDispatch();
   const updateSuccess = useAppSelector((state) => state.checkJob.updateSuccess);
 

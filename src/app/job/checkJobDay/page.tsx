@@ -50,7 +50,7 @@ export default async function CheckJobDayPage({
             </Link>
           </div>
           {checkJobDays ? (
-            <CheckJobDaysTable data={checkJobDays} />
+            <CheckJobDaysTable data={checkJobDays.slice()} />
           ) : (
             <Card className="my-2">
               <CardContent>

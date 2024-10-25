@@ -80,7 +80,7 @@ export const CheckJobForm: React.FC<CheckJobFormProps> = ({
     },
   });
 
-  const onSubmit = (values) => {
+  const onSubmit = (values: ICheckJob) => {
     if (values.id !== undefined && typeof values.id !== "number") {
       values.id = Number(values.id);
     }
@@ -179,7 +179,10 @@ export const CheckJobForm: React.FC<CheckJobFormProps> = ({
                       </SelectTrigger>
                       <SelectContent>
                         {googleFiles.map((option) => (
-                          <SelectItem key={option.id} value={option.id}>
+                          <SelectItem
+                            key={option.id}
+                            value={option.id as string}
+                          >
                             {option.name}
                           </SelectItem>
                         ))}

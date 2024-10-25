@@ -14,8 +14,8 @@ const ViewPdfPage = () => {
 
   const searchParam = useSearchParams();
 
-  const id = searchParam.get("id");
-  const day = searchParam.get("day");
+  const id = searchParam.get("id") as string;
+  const day = searchParam.get("day") as string;
 
   useEffect(() => {
     dispatch(downloadEntity({ id, day }));

@@ -13,7 +13,9 @@ import { Logs } from "lucide-react";
 
 import { downloadEntity } from "@/app/shared/reducers/entities/check-job-day.reducer";
 
-export const CheckJobDaysTable: React.FC<ICheckJobDay[]> = ({ data }) => {
+export const CheckJobDaysTable: React.FC<{ data: ICheckJobDay[] }> = ({
+  data,
+}) => {
   const dispatch = useAppDispatch();
 
   const triggerDownload = (blob: Blob, filename: string) => {
@@ -26,9 +28,9 @@ export const CheckJobDaysTable: React.FC<ICheckJobDay[]> = ({ data }) => {
     link.remove();
   };
   const handleDownload = async (
-    id?: number | undefined,
-    day?: string | undefined,
-    resultFileName?: string | null | undefined,
+    id: number,
+    day: string,
+    resultFileName: string,
   ) => {
     const resultAction = await dispatch(downloadEntity({ id, day }));
     if (downloadEntity.fulfilled.match(resultAction)) {
@@ -56,7 +58,7 @@ export const CheckJobDaysTable: React.FC<ICheckJobDay[]> = ({ data }) => {
     {
       header: "任务名称",
       cell: ({ row }) => {
-        return row.original.checkJob.name;
+        return row?.original?.checkJob?.jobName;
       },
     },
     {
@@ -95,9 +97,9 @@ export const CheckJobDaysTable: React.FC<ICheckJobDay[]> = ({ data }) => {
             <a
               onClick={() =>
                 handleDownload(
-                  row.original.id,
-                  row.original.day,
-                  row.original.resultFileName,
+                  row.original.id ?? 0,
+                  row.original.day ?? "",
+                  row.original.resultFileName ?? "",
                 )
               }
               className="text-blue-600 underline hover:text-blue-800"

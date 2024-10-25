@@ -4,20 +4,11 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import { Input } from "@/components/ui/input";
-
-import { RootState, useAppDispatch, useAppSelector } from "@/store/index";
-
+import { RootState, useAppDispatch } from "@/store/index";
 import { login } from "@/app/shared/reducers/authentication";
-
-import { usePathname, useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Loader } from "@/components/ui/loader";
-
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 type LoginFormInputs = {
   username: string;
