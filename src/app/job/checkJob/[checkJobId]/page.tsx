@@ -11,7 +11,7 @@ import { CheckJobForm } from "./components/check-job-form";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 
-export default async function AddressPage({
+export default function AddressPage({
   params,
 }: {
   params: { checkJobId: string };
@@ -27,7 +27,7 @@ export default async function AddressPage({
     } else {
       dispatch(reset());
     }
-  }, []);
+  }, [dispatch, isEditing, params.checkJobId]);
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Google Drive 任务" />
