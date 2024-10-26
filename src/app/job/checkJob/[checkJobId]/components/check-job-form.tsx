@@ -80,19 +80,20 @@ export const CheckJobForm: React.FC<CheckJobFormProps> = ({
     },
   });
 
-  const onSubmit = (values: ICheckJob) => {
-    if (values.id !== undefined && typeof values.id !== "number") {
-      values.id = Number(values.id);
-    }
-    const entity = {
-      ...checkJobEntity,
-      ...values,
-      rootFolderName: "testsad",
-    };
-    if (isEditing) {
-      dispatch(updateEntity(entity));
-    } else {
-      dispatch(createEntity(entity));
+  const onSubmit = async (values: ICheckJob) => {
+    try {
+      const entity = {
+        ...checkJobEntity,
+        ...values,
+        rootFolderName: "testsad",
+      };
+      if (isEditing) {
+        await dispatch(updateEntity(entity));
+      } else {
+        await dispatch(createEntity(entity));
+      }
+    } catch (error) {
+      toast.error("操作失败，请重试");
     }
   };
   useEffect(() => {
@@ -101,7 +102,7 @@ export const CheckJobForm: React.FC<CheckJobFormProps> = ({
       toast.success(toastMessage);
     }
     dispatch(listRootFolders());
-  }, [updateSuccess, dispatch]);
+  }, [updateSuccess, dispatch, router, toastMessage]);
 
   const onDelete = async () => {};
 

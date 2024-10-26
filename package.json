@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
-    "react-hook-form": "^7.52.1",
     "@nextui-org/react": "^2.4.6",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
@@ -43,6 +42,7 @@
     "clsx": "^2.1.1",
     "dayjs": "1.11.11",
     "flatpickr": "^4.6.13",
+    "framer-motion": "^11.11.10",
     "jsvectormap": "^1.6.0",
     "lucide-react": "^0.414.0",
     "next": "^14.2.4",
@@ -50,6 +50,7 @@
     "react": "^18",
     "react-apexcharts": "^1.4.1",
     "react-dom": "^18",
+    "react-hook-form": "^7.52.1",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.3.0",
     "react-jhipster": "0.25.3",
