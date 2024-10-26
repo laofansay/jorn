@@ -8,7 +8,7 @@ import { RootState, useAppDispatch } from "@/store/index";
 import { login } from "@/app/shared/reducers/authentication";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 type LoginFormInputs = {
   username: string;
