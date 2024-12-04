@@ -11,11 +11,13 @@ import Link from "next/link";
 import { Tooltip } from "@nextui-org/react";
 import TaskPopup from "./TaskPopup";
 
-import { partialUpdateEntity } from "@/app/shared/reducers/entities/check-job-day.reducer";
+import {
+  downloadEntity,
+  partialUpdateEntity,
+} from "@/app/shared/reducers/entities/check-job-day.reducer";
 import { useEffect, useRef, useState } from "react";
 import { remotebuildexecution } from "googleapis/build/src/apis/remotebuildexecution";
 
-import { downloadEntity } from "@/app/shared/reducers/entities/check-job-log.reducer";
 import { defaultValue } from "@/app/shared/model/check-job-day.model";
 import { ICheckJobLog } from "@/app/shared/model/check-job-log.model";
 
