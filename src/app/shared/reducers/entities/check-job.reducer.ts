@@ -21,7 +21,7 @@ const initialState: EntityState<ICheckJob> = {
   updateSuccess: false,
 };
 
-const apiUrl = "api/check-jobs";
+const apiUrl = "/api/check-jobs";
 
 // Actions
 
