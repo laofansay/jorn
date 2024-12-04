@@ -1,11 +1,11 @@
-import axios, { AxiosResponse } from 'axios';
-import { Storage } from 'react-jhipster';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios, { AxiosResponse } from "axios";
+import { Storage } from "react-jhipster";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { AppThunk } from '@/store/index';
-import { serializeAxiosError } from './reducer.utils';
+import { AppThunk } from "@/store/index";
+import { serializeAxiosError } from "./reducer.utils";
 
-const AUTH_TOKEN_KEY = 'jhi-authenticationToken';
+const AUTH_TOKEN_KEY = "jhi-authenticationToken";
 
 export const initialState = {
   loading: false,
@@ -28,9 +28,13 @@ export const getSession = (): AppThunk => async (dispatch, getState) => {
   await dispatch(getAccount());
 };
 
-export const getAccount = createAsyncThunk('authentication/get_account', async () => axios.get<any>('api/account'), {
-  serializeError: serializeAxiosError,
-});
+export const getAccount = createAsyncThunk(
+  "authentication/get_account",
+  async () => axios.get<any>("/api/account"),
+  {
+    serializeError: serializeAxiosError,
+  },
+);
 
 interface IAuthParams {
   username: string;
@@ -39,29 +43,35 @@ interface IAuthParams {
 }
 
 export const authenticate = createAsyncThunk(
-  'authentication/login',
-  async (auth: IAuthParams) => axios.post<any>('/api/authenticate', auth),
+  "authentication/login",
+  async (auth: IAuthParams) => axios.post<any>("/api/authenticate", auth),
   {
     serializeError: serializeAxiosError,
   },
 );
 
-export const login: (username: string, password: string, rememberMe?: boolean) => AppThunk =
+export const login: (
+  username: string,
+  password: string,
+  rememberMe?: boolean,
+) => AppThunk =
   (username, password, rememberMe = false) =>
-    async dispatch => {
-      const result = await dispatch(authenticate({ username, password, rememberMe }));
-      const response = result.payload as AxiosResponse;
-      const bearerToken = response?.headers?.authorization;
-      if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
-        const jwt = bearerToken.slice(7, bearerToken.length);
-        if (rememberMe) {
-          Storage.local.set(AUTH_TOKEN_KEY, jwt);
-        } else {
-          Storage.session.set(AUTH_TOKEN_KEY, jwt);
-        }
+  async (dispatch) => {
+    const result = await dispatch(
+      authenticate({ username, password, rememberMe }),
+    );
+    const response = result.payload as AxiosResponse;
+    const bearerToken = response?.headers?.authorization;
+    if (bearerToken && bearerToken.slice(0, 7) === "Bearer ") {
+      const jwt = bearerToken.slice(7, bearerToken.length);
+      if (rememberMe) {
+        Storage.local.set(AUTH_TOKEN_KEY, jwt);
+      } else {
+        Storage.session.set(AUTH_TOKEN_KEY, jwt);
       }
-      dispatch(getSession());
-    };
+    }
+    dispatch(getSession());
+  };
 
 export const clearAuthToken = () => {
   if (Storage.local.get(AUTH_TOKEN_KEY)) {
@@ -72,19 +82,19 @@ export const clearAuthToken = () => {
   }
 };
 
-export const logout: () => AppThunk = () => dispatch => {
+export const logout: () => AppThunk = () => (dispatch) => {
   clearAuthToken();
   dispatch(logoutSession());
 };
 
-export const clearAuthentication = messageKey => dispatch => {
+export const clearAuthentication = (messageKey) => (dispatch) => {
   clearAuthToken();
   dispatch(authError(messageKey));
   dispatch(clearAuth());
 };
 
 export const AuthenticationSlice = createSlice({
-  name: 'authentication',
+  name: "authentication",
   initialState: initialState as AuthenticationState,
   reducers: {
     logoutSession() {
@@ -117,7 +127,7 @@ export const AuthenticationSlice = createSlice({
         showModalLogin: true,
         loginError: true,
       }))
-      .addCase(authenticate.fulfilled, state => ({
+      .addCase(authenticate.fulfilled, (state) => ({
         ...state,
         loading: false,
         loginError: false,
@@ -133,7 +143,10 @@ export const AuthenticationSlice = createSlice({
         errorMessage: action.error.message,
       }))
       .addCase(getAccount.fulfilled, (state, action) => {
-        const isAuthenticated = action.payload && action.payload.data && action.payload.data.activated;
+        const isAuthenticated =
+          action.payload &&
+          action.payload.data &&
+          action.payload.data.activated;
         return {
           ...state,
           isAuthenticated,
@@ -142,16 +155,17 @@ export const AuthenticationSlice = createSlice({
           account: action.payload.data,
         };
       })
-      .addCase(authenticate.pending, state => {
+      .addCase(authenticate.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getAccount.pending, state => {
+      .addCase(getAccount.pending, (state) => {
         state.loading = true;
       });
   },
 });
 
-export const { logoutSession, authError, clearAuth } = AuthenticationSlice.actions;
+export const { logoutSession, authError, clearAuth } =
+  AuthenticationSlice.actions;
 
 // Reducer
 export default AuthenticationSlice.reducer;

@@ -24,7 +24,7 @@ const initialState: EntityState<IQuickBooksToken> = {
   updateSuccess: false,
 };
 
-const apiUrl = "api/quick-books-tokens";
+const apiUrl = "/api/quick-books-tokens";
 
 // Actions
 
