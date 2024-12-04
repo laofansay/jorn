@@ -5,12 +5,10 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { getEntities } from "@/app/shared/reducers/entities/check-job-day.reducer";
 import { useEffect } from "react";
-import Link from "next/link";
-import { PlusIcon } from "@radix-ui/react-icons";
-import { Button, Card } from "@nextui-org/react";
 import { CheckJobDaysTable } from "./components/table";
 import { CardContent } from "@/components/ui/card";
 import { Loader } from "@/components/ui/loader";
+import Addjob from "./components/addJob";
 
 export default async function CheckJobDayPage({
   params,
@@ -39,18 +37,15 @@ export default async function CheckJobDayPage({
 
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Tables" />
+      <Breadcrumb pageName="每日支票任务" />
+
       <div className="flex-col">
         <div className="flex-1 ">
           <div className="flex items-center justify-between">
-            <Link href="/profile/addresses/new">
-              <Button>
-                <PlusIcon className="mr-2 h-4" /> Add New
-              </Button>
-            </Link>
+            <Addjob />
           </div>
           {checkJobDays ? (
-            <CheckJobDaysTable data={checkJobDays.slice()} />
+            <CheckJobDaysTable data={checkJobDays} />
           ) : (
             <Card className="my-2">
               <CardContent>

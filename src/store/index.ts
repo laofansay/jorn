@@ -64,10 +64,38 @@ const rootReducer = combineReducers({
   register,
 });
 
+import errorMiddleware from "./error-middleware";
+import notificationMiddleware from "./notification-middleware";
+import loggerMiddleware from "./logger-middleware";
+
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }).concat(authMiddleware),
+  middleware: (
+    getDefaultMiddleware: (arg0: {
+      serializableCheck: {
+        // Ignore these field paths in all actions
+        ignoredActionPaths: string[];
+      };
+    }) => any[],
+  ) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore these field paths in all actions
+        ignoredActionPaths: [
+          "meta.arg",
+          "meta.baseQueryMeta",
+          "payload.config",
+          "payload.request",
+          "payload.headers",
+          "error",
+        ],
+      },
+    }).concat(
+      errorMiddleware,
+      notificationMiddleware,
+      loggerMiddleware,
+      authMiddleware,
+    ),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

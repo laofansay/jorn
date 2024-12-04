@@ -49,6 +49,7 @@ export const getEntity = createAsyncThunk(
 export const createEntity = createAsyncThunk(
   "checkJobDay/create_entity",
   async (entity: ICheckJobDay, thunkAPI) => {
+    console.info(entity);
     return axios.post<ICheckJobDay>(apiUrl, cleanEntity(entity));
   },
   { serializeError: serializeAxiosError },
@@ -99,6 +100,16 @@ export const downloadEntity = createAsyncThunk(
   { serializeError: serializeAxiosError },
 );
 
+export const doExecute = createAsyncThunk(
+  "checkJobDay/doExecute",
+  async ({ jobId, day }: { jobId: number; day: string }, thunkAPI) => {
+    return axios.post<ICheckJobDay>(
+      `/api/check-job-days/execute/${jobId}/${day}`,
+    );
+  },
+  { serializeError: serializeAxiosError },
+);
+
 // slice
 
 export const CheckJobDaySlice = createEntitySlice({
@@ -115,10 +126,14 @@ export const CheckJobDaySlice = createEntitySlice({
         state.updateSuccess = true;
         state.entity = {};
       })
+      .addCase(doExecute.fulfilled, (state) => {
+        state.updating = false;
+        state.updateSuccess = true;
+        state.entity = {};
+      })
       .addMatcher(isFulfilled(getEntities), (state, action) => {
         const { data, headers } = action.payload;
         const links = parseHeaderForLinks(headers.link);
-
         return {
           ...state,
           loading: false,
@@ -147,6 +162,7 @@ export const CheckJobDaySlice = createEntitySlice({
           updateEntity,
           partialUpdateEntity,
           deleteEntity,
+          doExecute,
         ),
         (state) => {
           state.errorMessage = null;
@@ -154,6 +170,7 @@ export const CheckJobDaySlice = createEntitySlice({
           state.updating = true;
         },
       )
+
       .addMatcher(isPending(downloadEntity), (state) => {
         state.loading = true;
       })

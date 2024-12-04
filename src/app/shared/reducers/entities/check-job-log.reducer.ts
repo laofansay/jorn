@@ -30,8 +30,8 @@ const apiUrl = "api/check-job-logs";
 
 export const getEntities = createAsyncThunk(
   "checkJobLog/fetch_entity_list",
-  async ({ page, size, sort }: IQueryParams) => {
-    const requestUrl = `${apiUrl}?${sort ? `page=${page}&size=${size}&sort=${sort}&` : ""}cacheBuster=${new Date().getTime()}`;
+  async ({ query, page, size, sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `page=${page}&size=${size}&sort=${sort}&${query}&` : `${query}`}cacheBuster=${new Date().getTime()}`;
     return axios.get<ICheckJobLog[]>(requestUrl);
   },
   { serializeError: serializeAxiosError },

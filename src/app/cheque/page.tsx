@@ -25,17 +25,6 @@ const FormElementsPage = () => {
       //   method: "POST",
       //   body: formData,
       // });
-
-      const resultAction = dispatch(
-        downloadEntity({ id: 1508, day: "10-14-2024" }),
-      );
-      if (downloadEntity.fulfilled.match(resultAction)) {
-        const blob = await resultAction.payload; // Assuming this is a Blob
-        const url = window.URL.createObjectURL(blob); // Create object URL for PDF
-        setPdfUrl(url);
-      } else {
-        console.error("Download failed: 下载pdf异常");
-      }
       // Set the URL to display the PDF in PdfViewer
     } catch (error) {
       console.error("Error generating PDF:", error);
@@ -74,6 +63,10 @@ const FormElementsPage = () => {
             )}
           </div>
         </form>
+
+        <div>
+          <h1>My Google Drive Files</h1>
+        </div>
       </div>
     </DefaultLayout>
   );
