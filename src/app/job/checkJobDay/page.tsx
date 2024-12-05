@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import { getEntities } from "@/app/shared/reducers/entities/check-job-day.reducer";
 import { useEffect } from "react";
 import { CheckJobDaysTable } from "./components/table";
-import { CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Loader } from "@/components/ui/loader";
 import Addjob from "./components/addJob";
 

@@ -17,7 +17,6 @@ import {
 } from "@/app/shared/reducers/entities/check-job.reducer";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { useEffect } from "react";
-import { ICheckJob } from "@/app/shared/model/check-job.model";
 
 export default async function CheckJobPage({
   params,

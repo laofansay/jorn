@@ -22,7 +22,7 @@ const initialState: EntityState<IEveryDayBill> = {
   updateSuccess: false,
 };
 
-const apiUrl = "api/every-day-bills";
+const apiUrl = "/api/every-day-bills";
 
 // Actions
 
