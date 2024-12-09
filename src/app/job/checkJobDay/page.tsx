@@ -19,6 +19,8 @@ export default async function CheckJobDayPage({
   const checkJobDays = useAppSelector((state) => state.checkJobDay.entities);
   const loading = useAppSelector((state) => state.checkJobDay.loading);
 
+  const updating = useAppSelector((state) => state.checkJobDay.updating);
+
   const getAllEntities = () => {
     dispatch(
       getEntities({
@@ -29,10 +31,10 @@ export default async function CheckJobDayPage({
 
   useEffect(() => {
     getAllEntities();
-  }, []);
+  }, [updating]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (

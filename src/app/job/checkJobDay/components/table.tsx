@@ -6,6 +6,7 @@ import { DataTable } from "@/components/ui/data-table";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { ColumnDef } from "@tanstack/react-table";
 import { Logs, Printer } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { CircuitBoard } from "lucide-react";
 import Link from "next/link";
 import { Tooltip } from "@nextui-org/react";
@@ -14,6 +15,7 @@ import TaskPopup from "./TaskPopup";
 import {
   downloadEntity,
   partialUpdateEntity,
+  deleteEntity,
 } from "@/app/shared/reducers/entities/check-job-day.reducer";
 import { useEffect, useRef, useState } from "react";
 import { remotebuildexecution } from "googleapis/build/src/apis/remotebuildexecution";
@@ -79,6 +81,10 @@ export const CheckJobDaysTable: React.FC<{ data: ICheckJobDay[] }> = ({
       id: id,
     };
     dispatch(partialUpdateEntity(entity));
+  };
+
+  const deleteJob = (id: number) => {
+    dispatch(deleteEntity(id));
   };
 
   const handleDownload = async (
@@ -246,6 +252,23 @@ export const CheckJobDaysTable: React.FC<{ data: ICheckJobDay[] }> = ({
                 }}
               >
                 <Logs className="h-4" />
+              </Button>
+            </Tooltip>
+
+            <Tooltip
+              content="删除任务生成的文件"
+              placement="top"
+              className="rounded-lg bg-gray-300 p-2  text-sm  text-black shadow-lg transition-opacity duration-300"
+            >
+              <Button
+                size="icon"
+                variant="outline"
+                ref={trigger}
+                onClick={() => {
+                  deleteJob(row.original.id ?? 0);
+                }}
+              >
+                <Trash2 className="h-4" />
               </Button>
             </Tooltip>
           </div>

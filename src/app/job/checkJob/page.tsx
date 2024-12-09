@@ -43,7 +43,7 @@ export default async function CheckJobPage({
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (
