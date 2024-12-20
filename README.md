@@ -156,9 +156,8 @@ pm2 start npx --name "website" -- next -p 3100
 
 pm2 start npm --name "jorn" -- start -- --port 4000
 
-
 pm2 delete 3
-  545  pm2 list
-  546  pm2 start npm --name "jorn" -- start -- --port 3100
+pm2 list
+pm2 start npm --name "jorn" -- start -- --port 3100
 
-  
+    npm start -- -p 3100
