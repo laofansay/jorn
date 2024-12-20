@@ -1,11 +1,10 @@
 "use client";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import Image from "next/image";
-import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import PdfViewer from "@/components/pdf/PdfViewer";
+import axios from "axios";
 
 const Settings = () => {
   const [image, setImage] = useState<string | null>(null);
@@ -49,18 +48,21 @@ const Settings = () => {
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://localhost:9090/api/pdf/generate", {
-        method: "POST",
-        body: formData,
+      const response = await axios.post("/api/pdf/generate", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data", // 可以省略，axios 会自动设置
+        },
+        responseType: "blob", // 告诉 axios 期望接收二进制数据
       });
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error("上传失败");
       }
 
-      const blob = await response.blob();
+      const blob = await response.data;
       const imageUrl = URL.createObjectURL(blob);
       setImage(imageUrl);
+      console.info("blob url:", imageUrl);
     } catch (error) {
       console.error("上传错误:", error);
     } finally {
