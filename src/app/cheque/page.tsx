@@ -13,6 +13,12 @@ const Settings = () => {
   const [file, setFile] = useState<File | null>(null);
   const [pdfFile, setPdfFile] = useState<string | null>(null);
 
+  const [isZoomed, setIsZoomed] = useState(false);
+
+  const toggleZoom = () => {
+    setIsZoomed(!isZoomed);
+  };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
@@ -163,12 +169,19 @@ const Settings = () => {
 
               {isLoading && <p>Uploading...</p>}
               <div className="px-7">
-                <div className="relative mb-5.5 flex h-64 w-full cursor-pointer items-center justify-center rounded border border-dashed border-primary bg-gray-100 px-4 py-4 dark:bg-gray-800 sm:py-7.5">
+                <div
+                  className="relative mb-5.5 flex h-64 w-full cursor-pointer items-center justify-center rounded border border-dashed border-primary bg-gray-100 px-4 py-4 dark:bg-gray-800 sm:py-7.5"
+                  onDoubleClick={toggleZoom}
+                >
                   {image && (
                     <img
                       src={image}
                       alt="check"
-                      className="max-h-full max-w-full rounded-lg object-contain shadow-md"
+                      className={`max-h-full max-w-full rounded-lg object-contain shadow-md transition-all duration-300 ${isZoomed ? "scale-150" : ""}`}
+                      style={{
+                        transform: isZoomed ? "scale(3)" : "scale(1)",
+                        transition: "transform 0.3s ease-in-out",
+                      }}
                     />
                   )}
                 </div>
